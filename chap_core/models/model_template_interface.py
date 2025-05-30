@@ -14,15 +14,14 @@ class ConfiguredModel(abc.ABC):
 
 
 class ModelTemplateInterface(abc.ABC):
-
     @abc.abstractmethod
     def get_config_class(self) -> type[ModelConfiguration]:  # gives a custom class of type ModelConfiguration
         # todo: could maybe be a property and not class
         pass
 
     @abc.abstractmethod
-    def get_model(self, model_configuration: ModelConfiguration = None) -> 'ConfiguredModel':
+    def get_model(self, model_configuration: ModelConfiguration = None) -> "ConfiguredModel":
         pass
 
-    def get_default_model(self) -> 'ConfiguredModel':
+    def get_default_model(self) -> "ConfiguredModel":
         return self.get_model()

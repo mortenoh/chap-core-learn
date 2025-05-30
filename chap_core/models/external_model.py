@@ -21,13 +21,13 @@ class ExternalModel(ConfiguredModel):
     """
 
     def __init__(
-            self,
-            runner,
-            name: str = None,
-            adapters=None,
-            working_dir="./",
-            data_type=HealthData,
-            configuration: BaseModel = None,
+        self,
+        runner,
+        name: str = None,
+        adapters=None,
+        working_dir="./",
+        data_type=HealthData,
+        configuration: BaseModel = None,
     ):
         self._runner = runner  # MlFlowTrainPredictRunner(model_path)
         # self.model_path = model_path
@@ -38,7 +38,9 @@ class ExternalModel(ConfiguredModel):
         self._data_type = data_type
         self._name = name
         self._polygons_file_name = None
-        self._configuration = configuration  # configuration passed from the user to the model, e.g. about covariates or parameters 
+        self._configuration = (
+            configuration  # configuration passed from the user to the model, e.g. about covariates or parameters
+        )
 
     @property
     def name(self):
@@ -68,7 +70,7 @@ class ExternalModel(ConfiguredModel):
         """
         Trains this model on the given dataset.
 
-        Parameters 
+        Parameters
         ----------
         train_data : DataSet
             The data to train the model on
@@ -90,9 +92,11 @@ class ExternalModel(ConfiguredModel):
         new_pd.to_csv(train_file_name_full)
 
         try:
-            self._runner.train(train_file_name, self._model_file_name,
-                               polygons_file_name="polygons.geojson" if self._polygons_file_name is not None else None
-                               )
+            self._runner.train(
+                train_file_name,
+                self._model_file_name,
+                polygons_file_name="polygons.geojson" if self._polygons_file_name is not None else None,
+            )
         except CommandLineException as e:
             logger.error("Error training model, command failed")
             raise ModelFailedException(str(e))
@@ -195,7 +199,5 @@ class ExternalModel(ConfiguredModel):
             logging.error(f"Error while parsing predictions: {df}")
             logging.error(f"Error message: {e}")
             raise ModelFailedException("Error while parsing predictions: %s" % e)
-        
+
         return d
-
-

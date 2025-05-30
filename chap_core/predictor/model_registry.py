@@ -8,6 +8,7 @@ from .published_models import model_dict
 from ..models.utils import get_model_from_directory_or_github_url
 from ..model_spec import PeriodType, ModelSpec
 import logging
+
 logger = logging.getLogger(__name__)
 
 naive_spec = ModelSpec(
@@ -60,7 +61,7 @@ class ModelRegistry:
                 period=PeriodType.any,
                 description="Model from config file",
                 author="CHAP",
-                github_link=github_url
+                github_link=github_url,
             )
         return cls(model_dict)
 
