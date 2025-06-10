@@ -224,7 +224,7 @@ wheels = [
 ]
 
 [[package]]
-name = "chap-core"
+name = "chap-core-learn"
 version = "1.0.7"
 source = { editable = "." }
 dependencies = [
